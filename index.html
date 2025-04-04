@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free VIN Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        input, button { padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Check Your Car VIN Report</h1>
+    <p>Enter your Vehicle Identification Number (VIN) below to get a free vehicle report.</p>
+    
+    <input type="text" id="vin" placeholder="Enter VIN" maxlength="17">
+    <button onclick="getVinReport()">Get Report</button>
+    
+    <h2>Vehicle Details</h2>
+    <div id="result"></div>
+
+    <script>
+        function getVinReport() {
+            let vin = document.getElementById('vin').value.trim();
+            if (vin.length !== 17) {
+                alert('Please enter a valid 17-character VIN.');
+                return;
+            }
+            
+            fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevin/${vin}?format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    let output = '<ul>';
+                    data.Results.forEach(item => {
+                        if (item.Variable && item.Value) {
+                            output += `<li><strong>${item.Variable}:</strong> ${item.Value}</li>`;
+                        }
+                    });
+                    output += '</ul>';
+                    document.getElementById('result').innerHTML = output;
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = 'Error fetching data. Please try again.';
+                });
+        }
+    </script>
+</body>
+</html>
