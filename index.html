@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIN Report - Get Your Vehicle History</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; text-align: center; padding: 20px; }
+        .container { background: white; padding: 20px; max-width: 500px; margin: auto; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); border-radius: 10px; }
+        input { width: 80%; padding: 10px; margin: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="logo.png" alt="VIN Report Logo" width="200">
+        <h1>Get Your Vehicle History Report</h1>
+        <p>Enter your Vehicle Identification Number (VIN) below and purchase a full report for $25.</p>
+        
+        <input type="text" id="vin" placeholder="Enter VIN" maxlength="17">
+        <button onclick="proceedToPayment()">Get Report</button>
+        
+        <div id="payment-section" class="hidden">
+            <h3>Complete Payment</h3>
+            <button id="payButton">Pay $25</button>
+        </div>
+        
+        <h2>Vehicle Details</h2>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        function proceedToPayment() {
+            let vin = document.getElementById('vin').value.trim();
+            if (vin.length !== 17) {
+                alert('Please enter a valid 17-character VIN.');
+                return;
+            }
+            document.getElementById('payment-section').classList.remove('hidden');
+        }
+
+        document.getElementById('payButton').addEventListener('click', function() {
+            // Stripe Checkout (Replace with your own public key & checkout session logic)
+            let stripe = Stripe('your-publishable-key-here');
+            stripe.redirectToCheckout({
+                sessionId: 'your-session-id-here'
+            }).then(function (result) {
+                alert(result.error.message);
+            });
+        });
+    </script>
+</body>
+</html>
