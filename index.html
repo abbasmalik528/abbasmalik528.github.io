@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIN Report - Trusted Car History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #002B45;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      position: relative;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      height: 40px;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+      nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background-color: #002B45;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      nav.active {
+        display: flex;
+      }
+    }
+    .hero {
+      background-color: #0D3A58;
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .hero h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    .vin-box {
+      margin-top: 30px;
+    }
+    .vin-box input {
+      padding: 10px;
+      width: 300px;
+      font-size: 16px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    .vin-box button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #F06C00;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 50px 20px;
+      background-color: white;
+    }
+    .feature-box {
+      width: 250px;
+      margin: 20px;
+      text-align: center;
+    }
+    .feature-box img {
+      width: 60px;
+      margin-bottom: 15px;
+    }
+    .report-section {
+      padding: 40px 20px;
+      background-color: #fff;
+      max-width: 800px;
+      margin: auto;
+    }
+    .report-section h2 {
+      color: #0D3A58;
+      margin-bottom: 20px;
+    }
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .report-table th,
+    .report-table td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: left;
+    }
+    .section-title {
+      font-size: 20px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #002B45;
+    }
+    footer {
+      background-color: #002B45;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 50px;
+    }
+    footer a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo-placeholder.png" alt="Your Logo">
+    </div>
+    <div class="menu-toggle" onclick="document.querySelector('nav').classList.toggle('active')">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Check VIN</a>
+      <a href="#">Pricing</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Check Your Vehicle's History Instantly</h1>
+    <p>Trusted Reports Powered by Data</p>
+    <div class="vin-box">
+      <form onsubmit="event.preventDefault(); document.getElementById('sampleReport').scrollIntoView({behavior: 'smooth'})">
+        <input type="text" name="vin" placeholder="Enter VIN Number" required>
+        <button type="submit">Get Report</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="feature-box">
+      <img src="check-icon.png" alt="Reliable">
+      <h3>Reliable Data</h3>
+      <p>We pull records from trusted government and commercial databases.</p>
+    </div>
+    <div class="feature-box">
+      <img src="secure-icon.png" alt="Secure">
+      <h3>Secure Payments</h3>
+      <p>Pay safely through our encrypted gateway. $25 per report.</p>
+    </div>
+    <div class="feature-box">
+      <img src="clock-icon.png" alt="Instant">
+      <h3>Instant Delivery</h3>
+      <p>Your report will be ready in seconds. No waiting around.</p>
+    </div>
+  </section>
+
+  <section id="sampleReport" class="report-section">
+    <h2>Sample Vehicle History Report</h2>
+    <table class="report-table">
+      <tr><th>VIN</th><td>1HGCM82633A004352</td></tr>
+      <tr><th>Make</th><td>Honda</td></tr>
+      <tr><th>Model</th><td>Accord</td></tr>
+      <tr><th>Year</th><td>2018</td></tr>
+      <tr><th>Body</th><td>Sedan</td></tr>
+      <tr><th>Mileage</th><td>52,345 miles</td></tr>
+      <tr><th>Accidents</th><td>1 Minor Accident Reported</td></tr>
+      <tr><th>Owners</th><td>2 Previous Owners</td></tr>
+      <tr><th>Service Records</th><td>12 Records Found</td></tr>
+    </table>
+    <h3 class="section-title">Accident History</h3>
+    <p>Minor rear-end collision reported on 08/14/2022. Airbags did not deploy.</p>
+
+    <h3 class="section-title">Ownership History</h3>
+    <ul>
+      <li>1st Owner (2018-2020) - Personal Lease</li>
+      <li>2nd Owner (2020-2024) - Personal Vehicle</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 VIN Report Inc. All rights reserved.</p>
+    <p>
+      <a href="#">Terms</a> |
+      <a href="#">Privacy</a> |
+      <a href="#">Contact</a>
+    </p>
+  </footer>
+</body>
+</html>
